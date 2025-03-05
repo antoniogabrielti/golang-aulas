@@ -20,6 +20,9 @@ Additional Environment Information:
 
 These environment variables are critical when building cross-platform Go applications.
 
+iniciar um novo modulo em go:
+go mod init
+
 go env -w GOOS=windows
 go env -w GOARCH=amd64
 go build -o hello.exe main.go
@@ -54,15 +57,28 @@ func main() {
 			return
 		}
 
+		chutes[i] = chuteInt
+
 		switch {
 		case chuteInt < x:
 			fmt.Println("Você errou. O número sorteado é maior que", chuteInt)
 		case chuteInt > x:
 			fmt.Println("Você errou. O número sorteado é menor que", chuteInt)
 		case chuteInt == x:
+			fmt.Println("")
+			fmt.Printf(
+				"Parabéns! Você acertou! o número era: %d"+
+					"\nVocê acertou em %d tentativas. \nEssas foram as suas tentativas: %v\n", x, i+1, chutes[:i+1],
+			)
 			return
 		}
 
-		chutes[i] = chuteInt
 	}
+
+	fmt.Println("")
+
+	fmt.Printf(
+		"Infelizmente, você não acertou o número, quer era: %d"+
+			"\nVocê teve 10 tentativas. \nEssas foram as suas tentativas: %v\n", x, chutes,
+	)
 }
